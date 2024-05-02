@@ -4,11 +4,13 @@ import guru.springframework.domain.*;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import guru.springframework.repositories.reactive.CategoryReactiveRepository;
+import guru.springframework.repositories.reactive.RecipeReactiveRepository;
 import guru.springframework.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,15 +30,23 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    private final UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
+//    private final UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
+//    private final CategoryReactiveRepository categoryReactiveRepository;
+//    private final RecipeReactiveRepository recipeReactiveRepository;
 
     public RecipeBootstrap(CategoryRepository categoryRepository,
-                           RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository,
-            UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository) {
+                           RecipeRepository recipeRepository,
+                           UnitOfMeasureRepository unitOfMeasureRepository
+//            , UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository,
+//                           CategoryReactiveRepository categoryReactiveRepository,
+//                           RecipeReactiveRepository recipeReactiveRepository
+    ) {
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
-        this.unitOfMeasureReactiveRepository = unitOfMeasureReactiveRepository;
+//        this.unitOfMeasureReactiveRepository = unitOfMeasureReactiveRepository;
+//        this.categoryReactiveRepository = categoryReactiveRepository;
+//        this.recipeReactiveRepository = recipeReactiveRepository;
     }
 
     @Override
@@ -48,7 +58,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         log.debug("Loading Bootstrap Data");
 
         log.error("#################");
-        log.error("Count Reactive: " + unitOfMeasureReactiveRepository.count().block().toString());
+//        log.error("UOM Count: " + unitOfMeasureReactiveRepository.count().block().toString());
+//        log.error("Category Count: " + categoryReactiveRepository.count().block().toString());
+//        log.error("Recipe Count: " + recipeReactiveRepository.count().block().toString());
     }
 
     private void loadCategories(){
