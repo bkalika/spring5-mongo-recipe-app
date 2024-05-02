@@ -39,18 +39,10 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Mono<Recipe> findById(String id) {
-
-//        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
-//
-//        if (!recipeOptional.isPresent()) {
-//            throw new NotFoundException("Recipe Not Found. For ID value: " + id );
-//        }
-
         return recipeReactiveRepository.findById(id);
     }
 
     @Override
-    @Transactional
     public Mono<RecipeCommand> findCommandById(String id) {
 //        return recipeToRecipeCommand.convert(findById(id));
         return recipeReactiveRepository.findById(id)

@@ -46,7 +46,7 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void getRecipeByIdTest() throws Exception {
+    public void getRecipeByIdTest() {
         Recipe recipe = new Recipe();
         recipe.setId("1");
 
@@ -59,24 +59,8 @@ public class RecipeServiceImplTest {
         verify(recipeReactiveRepository, never()).findAll();
     }
 
-    /**
-     * This test is not relevant
-     */
-    @Disabled
     @Test
-    public void getRecipeByIdTestNotFound() {
-
-        Recipe recipe = new Recipe();
-
-        when(recipeReactiveRepository.findById(anyString())).thenReturn(Mono.just(recipe));
-
-        assertThrows(NotFoundException.class, () -> recipeService.findById("1").block());
-
-        //should go boom
-    }
-
-    @Test
-    public void getRecipeCommandByIdTest() throws Exception {
+    public void getRecipeCommandByIdTest() {
         Recipe recipe = new Recipe();
         recipe.setId("1");
 
@@ -95,11 +79,11 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void getRecipesTest() throws Exception {
+    public void getRecipesTest() {
 
         Recipe recipe = new Recipe();
-        HashSet receipesData = new HashSet();
-        receipesData.add(recipe);
+//        HashSet recipesData = new HashSet();
+//        recipesData.add(recipe);
 
         when(recipeService.getRecipes()).thenReturn(Flux.just(recipe));
 
@@ -111,7 +95,7 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void testDeleteById() throws Exception {
+    public void testDeleteById() {
 
         //given
         String idToDelete = "2";

@@ -56,7 +56,7 @@ public class IndexControllerTest {
     }
 
     @Test
-    public void getIndexPage() throws Exception {
+    public void getIndexPage() {
 
         //given
         Set<Recipe> recipes = new HashSet<>();
@@ -74,13 +74,12 @@ public class IndexControllerTest {
         //when
         String viewName = controller.getIndexPage(model);
 
-
         //then
         assertEquals("index", viewName);
         verify(recipeService, times(1)).getRecipes();
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
-        List<Recipe> setInController = argumentCaptor.getValue();
-        assertEquals(2, setInController.size());
+//        Flux<Recipe> fluxInController = argumentCaptor.getValue();
+        List<Recipe> recipeList = argumentCaptor.getValue();
+        assertEquals(2, recipeList.size());
     }
-
 }
